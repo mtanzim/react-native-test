@@ -4,7 +4,7 @@ import Game from './components/Game'
 export default class App extends React.Component {
   render() {
     return (
-      <Game/>
+      <Game numComponents={6} sumComponents={3}/>
     );
   }
 }

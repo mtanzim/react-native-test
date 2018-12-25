@@ -1,17 +1,36 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import PropTypes from "prop-types";
+
+import EachCard from './EachCard'
 
 export default class Game extends React.Component {
+  static propTypes = {
+    numComponents: PropTypes.number.isRequired,
+    sumComponents: PropTypes.number.isRequired
+  };
+
+  LOWER_BOUND = 10;
+  UPPPER_BOUND = 40;
+
+  numberArray = Array
+    .from({ length: this.props.numComponents })
+    .map( () => this.LOWER_BOUND + Math.floor(this.UPPPER_BOUND * Math.random()));
+
+  // TODO: shuffle random numbers
+  sum = this.numberArray
+    .slice(0,this.props.sumComponents)
+    .reduce((a, b) =>  a + b, 0);
+
   render() {
-    // console.warn('Hello');
-    // console.warn('ooh this is fun!');
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Hello World!</Text>
-        <Text style={styles.textSubtitle}>Welcome to my React Native Project</Text>
-        <Text style={styles.textSubtitle}>How fast will this change with an emulator?</Text>
-        <Text style={styles.textSubtitle}>Ooooh that is much faster! Is it working over network?</Text>
-        <Text style={styles.textAuthor}> - Tanzim Mokammel</Text>
+        <Text style={styles.sumTarget}>{this.sum}</Text>
+        <View style={styles.childContainer}>
+          {this.numberArray.map((a, i) => (
+            <EachCard val={a} id={i} key={i}/>
+          ))}
+        </View>
       </View>
     );
   }
@@ -20,19 +39,23 @@ export default class Game extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'cyan',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#ddd",
+    paddingTop: 60, 
+    // marginTop: 30
   },
-  text: {
+  sumTarget: {
+    marginHorizontal: 15,
+    paddingVertical: 30,
     fontSize: 40,
+    backgroundColor: "cyan",
+    textAlign: "center"
   },
-  textSubtitle: {
-    fontSize: 12,
-    // alignText: 'center'
+  childContainer: {
+    flex: 1,
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: "#ddd",
+    marginTop: 75
   },
-  textAuthor: {
-    fontSize: 20,
-  }
-  
 });
