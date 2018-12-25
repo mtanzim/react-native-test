@@ -1,31 +1,46 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
 export default class EachCard extends React.Component {
   static propTypes = {
     id: PropTypes.number.isRequired,
     val: PropTypes.number.isRequired,
-    // key: PropTypes.number.isRequired
+    handlePress: PropTypes.func.isRequired,
+    isCardSelected: PropTypes.bool.isRequired
   };
 
   render() {
     return (
-      <Text style={styles.childTarget} id={this.props.id} key={this.props.index}>
-        {this.props.val}
-      </Text>
+      <TouchableOpacity
+        onPress={this.props.handlePress(this.props.val, this.props.id)}
+      >
+        <Text
+          style={[
+            styles.childTarget,
+            this.props.isCardSelected && styles.selected
+          ]}
+          id={this.props.id}
+          key={this.props.id}
+        >
+          {this.props.val}
+        </Text>
+      </TouchableOpacity>
     );
   }
 }
 
 const styles = StyleSheet.create({
   childTarget: {
-    width:100,
+    width: 100,
     marginHorizontal: 15,
     marginVertical: 10,
     paddingVertical: 10,
     fontSize: 23,
     backgroundColor: "#aaa",
     textAlign: "center"
+  },
+  selected: {
+    opacity: 0.3
   }
 });

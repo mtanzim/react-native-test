@@ -1,10 +1,16 @@
-import React from 'react';
-import Game from './components/Game'
+import React from "react";
+import Game from "./components/Game";
 
 export default class App extends React.Component {
+  #NUMCOMPONENTS = 6;
+  #SUMCOMPONENTS = 3;
+
   render() {
     return (
-      <Game numComponents={6} sumComponents={3}/>
+      <Game
+        numComponents={this.#NUMCOMPONENTS}
+        sumComponents={this.#SUMCOMPONENTS}
+      />
     );
   }
 }
