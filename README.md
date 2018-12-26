@@ -11,3 +11,5 @@ Testing react native by following along this [tutorial](https://www.lynda.com/Re
   - Main question: Does the element impact UI or not?
   - [When does react re-render?](https://lucybain.com/blog/2017/react-js-when-to-rerender/)
     - > A re-render can only be triggered if a component’s state has changed. The state can change from a props change, or from a direct setState change. The component gets the updated state and React decides if it should re-render the component. Unfortunately, by default React is incredibly simplistic and basically re-renders everything all the time. Component changed? Re-render. Parent changed? Re-render. Section of props that doesn't actually impact the view changed? Re-render.
+- [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+- [Flexbox in React Native](https://facebook.github.io/react-native/docs/flexbox)
