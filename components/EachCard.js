@@ -37,10 +37,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingVertical: 10,
     fontSize: 23,
+    textAlign: "center",
     backgroundColor: "#aaa",
-    textAlign: "center"
   },
   selected: {
     opacity: 0.3
-  }
+  },
+
 });
