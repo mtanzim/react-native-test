@@ -32,16 +32,15 @@ export default class EachCard extends React.Component {
 
 const styles = StyleSheet.create({
   childTarget: {
-    width: 100,
+    width: 75,
     marginHorizontal: 15,
     marginVertical: 10,
     paddingVertical: 10,
     fontSize: 23,
     textAlign: "center",
-    backgroundColor: "#aaa",
+    backgroundColor: "#03a9f4"
   },
   selected: {
     opacity: 0.3
-  },
-
+  }
 });
