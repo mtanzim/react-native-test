@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, BackHandler } from "react-native";
 import PropTypes from "prop-types";
 
 import EachCard from "./EachCard";
@@ -31,6 +31,14 @@ export default class Game extends React.Component {
     this.numberArrayShuffled = [];
     this.timer = undefined;
     this.state = this.generateRandoms();
+  }
+
+  componentDidMount () {
+    BackHandler.addEventListener('hardwareBackPress', this.props.resetAll(this.timer, true));
+  }
+  componentWillUnmount() {
+    if (this.timer) clearTimeout(this.timer);
+    BackHandler.removeEventListener('hardwareBackPress', this.props.resetAll(this.timer, true));
   }
 
   startTimer = () => {
@@ -68,6 +76,8 @@ export default class Game extends React.Component {
 
     return { remainingTime, isLoading, selectedIds, isWin };
   };
+
+
 
   restartGame = (isWin) => {
     console.log('Restarting!');
@@ -156,6 +166,7 @@ export default class Game extends React.Component {
             ))}
         </View>
         <Button color={styles.resetBtn.backgroundColor} disabled={this.props.id < 1} title="Reset" onPress={this.props.resetAll(this.timer)}></Button>
+        <Button color={styles.backBtn.backgroundColor}  title="Go Back" onPress={this.props.resetAll(this.timer, true)}></Button>
       </View>
     );
   }
@@ -166,12 +177,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ddd",
     paddingTop: 35,
-    paddingBottom: 50,
+    paddingBottom: 10,
     paddingHorizontal: 15,
     // marginTop: 30
   },
   resetBtn: {
     backgroundColor: '#03a9f4',
+  },
+  backBtn: {
+    backgroundColor: '#f44336',
   },
   scoreContainer: {
     flex: 0.1,
